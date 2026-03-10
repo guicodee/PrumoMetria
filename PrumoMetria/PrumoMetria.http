@@ -1,0 +1,6 @@
+@PrumoMetria_HostAddress = http://localhost:5070
+
+GET {{PrumoMetria_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
