@@ -33,10 +33,10 @@ public class StudyPlanRepository : IStudyPlanRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task<StudyPlan?> GetStudyPlanById(Guid id)
+    public async Task<StudyPlan?> GetStudyPlanById(Guid studyPlanId)
     {
         return await _context.StudyPlans
-            .Where(plan => plan.Id == id)
+            .Where(plan => plan.Id == studyPlanId)
             .Include(plan => plan.Subjects)
             .ThenInclude(subject => subject.Contents)
             .Include(plan => plan.Tasks)

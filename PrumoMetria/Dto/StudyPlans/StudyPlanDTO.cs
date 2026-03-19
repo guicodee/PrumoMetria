@@ -14,6 +14,15 @@ public record CreateStudyPlanDTO(
     string? Description
 );
 
+public record UpdateStudyPlanDTO(
+    [Required(ErrorMessage = "Name is required")]
+    [MaxLength(100, ErrorMessage = "Name cannot exceed 100 characters")]
+    string Name, 
+    
+    [MaxLength(500, ErrorMessage = "Description cannot exceed 500 characters")]
+    string? Description
+);
+
 public record StudyPlanDTO{
     public Guid Id { get; init; }
     public string Name { get; init; } = string.Empty;
