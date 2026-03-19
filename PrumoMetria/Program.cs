@@ -7,7 +7,9 @@ using Microsoft.OpenApi.Models;
 using PrumoMetria.Data;
 using PrumoMetria.Entities;
 using PrumoMetria.Helpers;
+using PrumoMetria.Repositories;
 using PrumoMetria.Services.Auth;
+using PrumoMetria.Services.StudyPlans;
 using PrumoMetria.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -90,6 +92,8 @@ builder.Services.AddSwaggerGen(options =>
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<JwtHelper>();
+builder.Services.AddScoped<StudyPlanRepository>();
+builder.Services.AddScoped<IStudyPlanService, StudyPlanService>();
 
 var app = builder.Build();
 
