@@ -19,18 +19,18 @@ public class StudyPlanService : IStudyPlanService
         _userManager = userManager;
     }
     
-    public async Task<StudyPlanDTO?> Create(string userId, CreateStudyPlanDTO studyPlan)
+    public async Task<ServiceResult<StudyPlanDTO?>> Create(string userId, CreateStudyPlanDTO studyPlan)
     {
         var user = await _userManager.FindByIdAsync(userId);
 
         if (user == null)
-            return null;
+            return ServiceResult<StudyPlanDTO?>.Fail("User not found", 404);
         
         var countPlansOfUser = await _repository.GetStudyPlanCountByUserId(userId);
         var maxPlans = user.IsPremium ? int.MaxValue : 2;
 
         if (countPlansOfUser >= maxPlans)
-            return null;
+            return ServiceResult<StudyPlanDTO?>.Fail("Plan limit reached.", 400);
         
         var newStudyPlan = new StudyPlan()
         {
@@ -42,59 +42,60 @@ public class StudyPlanService : IStudyPlanService
 
         await _repository.AddStudyPlan(newStudyPlan);
 
-        return newStudyPlan.ToDTO();
+        return ServiceResult<StudyPlanDTO?>.Success(newStudyPlan.ToDTO());
     }
 
-    public async Task<StudyPlanDTO?> Update(string userId, Guid studyPlanId, UpdateStudyPlanDTO studyPlan)
+    public async Task<ServiceResult<StudyPlanDTO?>> Update(string userId, Guid studyPlanId, UpdateStudyPlanDTO studyPlan)
     {
         var existsStudyPlan = await _repository.GetStudyPlanById(studyPlanId);
 
         if (existsStudyPlan == null)
-            return null;
+            return ServiceResult<StudyPlanDTO?>.Fail("Plan not found", 404);
 
         if (existsStudyPlan.UserId != userId)
-            return null;
+            return ServiceResult<StudyPlanDTO?>.Fail("Plan not found", 404);
 
         existsStudyPlan.Name = studyPlan.Name;
         existsStudyPlan.Description = studyPlan.Description;
 
         await _repository.UpdateStudyPlan(existsStudyPlan);
 
-        return existsStudyPlan.ToDTO();
+        return ServiceResult<StudyPlanDTO?>.Success(existsStudyPlan.ToDTO());
     }
 
-    public async Task<bool> Delete(string userId, Guid studyPlanId)
+    public async Task<ServiceResult<bool>> Delete(string userId, Guid studyPlanId)
     {
         var existsStudyPlan = await _repository.GetStudyPlanById(studyPlanId);
 
         if (existsStudyPlan == null)
-            return false;
+            return ServiceResult<bool>.Fail("Plan not found", 404);
 
         if (existsStudyPlan.UserId != userId)
-            return false;
+            return ServiceResult<bool>.Fail("Plan not found", 404);
 
         await _repository.DeleteStudyPlan(existsStudyPlan);
         
-        return true;
+        return ServiceResult<bool>.Success(true);
     }
 
-    public async Task<StudyPlanDTO?> GetPlanById(string userId, Guid studyPlanId)
+    public async Task<ServiceResult<StudyPlanDTO?>> GetPlanById(string userId, Guid studyPlanId)
     {
         var studyPlan = await _repository.GetStudyPlanById(studyPlanId);
         
         if(studyPlan == null)
-            return null;
+            return ServiceResult<StudyPlanDTO?>.Fail("Plan not found", 404);
 
         if (studyPlan.UserId != userId)
-            return null;
-
-        return studyPlan.ToDTO();
+            return ServiceResult<StudyPlanDTO?>.Fail("Plan not found", 404);
+        
+        return ServiceResult<StudyPlanDTO?>.Success(studyPlan.ToDTO());
     }
 
-    public async Task<List<StudyPlanDTO>> GetPlansByUserId(string userId)
+    public async Task<ServiceResult<List<StudyPlanDTO>>> GetPlansByUserId(string userId)
     {
         var studyPlans = await _repository.GetStudyPlanByUserId(userId);
 
-        return studyPlans.Select(x => x.ToDTO()).ToList();
+        return ServiceResult<List<StudyPlanDTO>>
+            .Success(studyPlans.Select(x => x.ToDTO()).ToList());
     }
 }
