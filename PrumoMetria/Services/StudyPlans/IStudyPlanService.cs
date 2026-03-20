@@ -4,9 +4,9 @@ namespace PrumoMetria.Services.StudyPlans;
 
 public interface IStudyPlanService
 {
-    Task<StudyPlanDTO?> Create(string userId, CreateStudyPlanDTO studyPlan);
-    Task<StudyPlanDTO?> Update(string userId, Guid studyPlanId, UpdateStudyPlanDTO studyPlan);
-    Task<bool> Delete(string userId, Guid studyPlanId);
-    Task<StudyPlanDTO?> GetPlanById(string userId, Guid studyPlanId);
-    Task<List<StudyPlanDTO>> GetPlansByUserId(string userId);
+    Task<ServiceResult<StudyPlanDTO?>> Create(string userId, CreateStudyPlanDTO studyPlan);
+    Task<ServiceResult<StudyPlanDTO?>> Update(string userId, Guid studyPlanId, UpdateStudyPlanDTO studyPlan);
+    Task<ServiceResult<bool>> Delete(string userId, Guid studyPlanId);
+    Task<ServiceResult<StudyPlanDTO?>> GetPlanById(string userId, Guid studyPlanId);
+    Task<ServiceResult<List<StudyPlanDTO>>> GetPlansByUserId(string userId);
 }
