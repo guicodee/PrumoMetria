@@ -92,7 +92,7 @@ builder.Services.AddSwaggerGen(options =>
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<JwtHelper>();
-builder.Services.AddScoped<StudyPlanRepository>();
+builder.Services.AddScoped<IStudyPlanRepository, StudyPlanRepository>();
 builder.Services.AddScoped<IStudyPlanService, StudyPlanService>();
 
 var app = builder.Build();
