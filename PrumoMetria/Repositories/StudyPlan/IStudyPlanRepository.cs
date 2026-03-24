@@ -10,5 +10,4 @@ public interface IStudyPlanRepository
     Task<StudyPlan?> GetStudyPlanById(Guid studyPlanId);
     Task<List<StudyPlan>> GetStudyPlanByUserId(string userId);
     Task<int> GetStudyPlanCountByUserId(string userId);
-    Task<bool> ExistsStudyPlan(string userId, Guid studyPlanId);
 }

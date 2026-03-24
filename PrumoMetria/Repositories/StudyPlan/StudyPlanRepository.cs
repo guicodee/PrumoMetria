@@ -56,10 +56,4 @@ public class StudyPlanRepository : IStudyPlanRepository
         return await _context.StudyPlans
             .CountAsync(plan => plan.UserId == userId);
     }
-
-    public async Task<bool> ExistsStudyPlan(string userId, Guid studyPlanId)
-    {
-        return await _context.StudyPlans
-            .AnyAsync(plan => plan.UserId == userId && plan.Id == studyPlanId);
-    }
 }
