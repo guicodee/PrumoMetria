@@ -42,7 +42,7 @@ public class StudyPlanService : IStudyPlanService
 
         await _repository.AddStudyPlan(newStudyPlan);
 
-        return ServiceResult<StudyPlanDTO?>.Success(newStudyPlan.ToDTO());
+        return ServiceResult<StudyPlanDTO?>.Success(newStudyPlan.ToDTOStudyPlan());
     }
 
     public async Task<ServiceResult<StudyPlanDTO?>> Update(string userId, Guid studyPlanId, UpdateStudyPlanDTO studyPlan)
@@ -60,7 +60,7 @@ public class StudyPlanService : IStudyPlanService
 
         await _repository.UpdateStudyPlan(existsStudyPlan);
 
-        return ServiceResult<StudyPlanDTO?>.Success(existsStudyPlan.ToDTO());
+        return ServiceResult<StudyPlanDTO?>.Success(existsStudyPlan.ToDTOStudyPlan());
     }
 
     public async Task<ServiceResult<bool>> Delete(string userId, Guid studyPlanId)
@@ -88,7 +88,7 @@ public class StudyPlanService : IStudyPlanService
         if (studyPlan.UserId != userId)
             return ServiceResult<StudyPlanDTO?>.Fail("Plan not found", 404);
         
-        return ServiceResult<StudyPlanDTO?>.Success(studyPlan.ToDTO());
+        return ServiceResult<StudyPlanDTO?>.Success(studyPlan.ToDTOStudyPlan());
     }
 
     public async Task<ServiceResult<List<StudyPlanDTO>>> GetPlansByUserId(string userId)
@@ -96,6 +96,6 @@ public class StudyPlanService : IStudyPlanService
         var studyPlans = await _repository.GetStudyPlanByUserId(userId);
 
         return ServiceResult<List<StudyPlanDTO>>
-            .Success(studyPlans.Select(x => x.ToDTO()).ToList());
+            .Success(studyPlans.Select(x => x.ToDTOStudyPlan()).ToList());
     }
 }
