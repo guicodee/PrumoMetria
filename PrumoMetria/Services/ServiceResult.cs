@@ -1,4 +1,4 @@
-﻿namespace PrumoMetria.Services.StudyPlans;
+﻿namespace PrumoMetria.Services;
 
 public class ServiceResult<T>
 {
