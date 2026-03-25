@@ -26,6 +26,19 @@ public class StudyPlanController : BaseController
 
         return Ok(result.Data);
     }
+
+    [HttpGet]
+    public async Task<IActionResult> GetPlans()
+    {
+        var userId = GetUserId();
+        
+        var result = await _service.GetPlansByUserId(userId);
+        
+        if (!result.IsSuccess)
+            return StatusCode(result.StatusCode, result.Error);
+        
+        return Ok(result.Data);
+    }
     
     [HttpPost]
     public async Task<IActionResult> CreatePlan([FromBody] CreateStudyPlanDTO studyPlan)
@@ -37,7 +50,7 @@ public class StudyPlanController : BaseController
         if (!result.IsSuccess)
             return StatusCode(result.StatusCode, result.Error);
 
-        return CreatedAtAction(nameof(CreatePlan), new { Id = result.Data!.Id}, result.Data);
+        return CreatedAtAction(nameof(GetPlanById), new { studyPlanId = result.Data!.Id },  result.Data);
     }
 
     [HttpPut("{studyPlanId}")]
