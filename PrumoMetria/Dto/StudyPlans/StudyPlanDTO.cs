@@ -2,28 +2,30 @@
 
 namespace PrumoMetria.Dto.StudyPlans;
 
-public record CreateStudyPlanDTO(
+public class CreateStudyPlanDTO {
     [Required(ErrorMessage = "Name is required")]
     [MaxLength(100, ErrorMessage = "Name cannot exceed 100 characters")]
-    string Name, 
+    public string Name { get; set; } = string.Empty; 
     
     [Required(ErrorMessage = "Color is required")]
-    string Color,
-    
-    [MaxLength(500, ErrorMessage = "Description cannot exceed 500 characters")]
-    string? Description
-);
+    public string Color { get; set; } = string.Empty;
 
-public record UpdateStudyPlanDTO(
-    [Required(ErrorMessage = "Name is required")]
+    [MaxLength(500, ErrorMessage = "Description cannot exceed 500 characters")]
+    public string? Description { get; set; } = string.Empty;
+};
+
+public class UpdateStudyPlanDTO
+{
+    [Required(ErrorMessage = "Name is required")] 
     [MaxLength(100, ErrorMessage = "Name cannot exceed 100 characters")]
-    string Name, 
+    public string Name { get; set; } = string.Empty;
     
     [MaxLength(500, ErrorMessage = "Description cannot exceed 500 characters")]
-    string? Description
-);
+    public string? Description { get; set; } = string.Empty;
+};
 
-public record StudyPlanDTO{
+public record StudyPlanDTO
+{
     public Guid Id { get; init; }
     public string Name { get; init; } = string.Empty;
     public string Color { get; init; } = string.Empty;

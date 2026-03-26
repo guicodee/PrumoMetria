@@ -3,23 +3,23 @@ using PrumoMetria.Entities;
 
 namespace PrumoMetria.Dto.Subjects;
 
-public record CreateSubjectDTO(
+public class CreateSubjectDTO{
     [Required(ErrorMessage = "Name is required")]
     [MaxLength(100, ErrorMessage = "Name cannot exceed 100 characters")]
-    string Name, 
-    
-    [Required(ErrorMessage = "Color is required")]
-    string Color
-);
+    public string Name { get; set; } = string.Empty;
 
-public record UpdateSubjectDTO(
+    [Required(ErrorMessage = "Color is required")]
+    public string Color { get; set; } = string.Empty;
+};
+
+public class UpdateSubjectDTO{
     [Required(ErrorMessage = "Name is required")]
     [MaxLength(100, ErrorMessage = "Name cannot exceed 100 characters")]
-    string Name, 
-    
+    public string Name { get; set; } = string.Empty;
+
     [Required(ErrorMessage = "Color is required")]
-    string Color
-);
+    public string Color { get; set; } = string.Empty;
+};
 
 public record SubjectDTO{
     public Guid Id { get; init; }
