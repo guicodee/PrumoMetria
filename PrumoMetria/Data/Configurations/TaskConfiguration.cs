@@ -4,9 +4,9 @@ using PrumoMetria.Entities;
 
 namespace PrumoMetria.Data.Configurations;
 
-public class TaskConfiguration : IEntityTypeConfiguration<Tasks>
+public class TaskConfiguration : IEntityTypeConfiguration<StudyTask>
 {
-    public void Configure(EntityTypeBuilder<Tasks> builder)
+    public void Configure(EntityTypeBuilder<StudyTask> builder)
     {
         builder.ToTable("Tasks");
 

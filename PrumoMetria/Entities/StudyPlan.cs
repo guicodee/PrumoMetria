@@ -10,7 +10,7 @@ public class StudyPlan : BaseEntity
     public ApplicationUser User { get; set; } = null!;
     
     public ICollection<Subject> Subjects { get; set; } = [];
-    public ICollection<Tasks> Tasks { get; set; } = [];
+    public ICollection<StudyTask> Tasks { get; set; } = [];
     
     public int TotalStudyTime { get; set; }
     public int Progress { get; set; }
