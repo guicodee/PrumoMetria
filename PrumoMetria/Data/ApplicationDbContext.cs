@@ -12,7 +12,7 @@ public class ApplicationDbContext(
     public DbSet<Subject> Subjects { get; set; }
     public DbSet<Content> Contents { get; set; }
     public DbSet<StudySession> StudySessions { get; set; }
-    public DbSet<Tasks> Tasks { get; set; }
+    public DbSet<StudyTask> StudyTask { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
