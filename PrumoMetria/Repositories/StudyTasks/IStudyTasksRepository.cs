@@ -8,6 +8,6 @@ public interface IStudyTasksRepository
     Task UpdateStudyTasks(StudyTask task);
     Task DeleteStudyTasks(StudyTask task);
     Task<StudyTask?> GetStudyTasksById(Guid taskId);
-    Task<List<StudyTask>> GetStudyTaskss(Guid studyPlanId);
+    Task<List<StudyTask>> GetStudyTasks(Guid studyPlanId);
     Task<int> CountStudyTaskByStudyPlanId(Guid studyPlanId);
 }
