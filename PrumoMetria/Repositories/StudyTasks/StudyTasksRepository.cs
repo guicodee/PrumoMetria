@@ -39,7 +39,7 @@ public class StudyTasksRepository : IStudyTasksRepository
             .FirstOrDefaultAsync(task => task.Id == taskId);
     }
 
-    public async Task<List<StudyTask>> GetStudyTaskss(Guid studyPlanId)
+    public async Task<List<StudyTask>> GetStudyTasks(Guid studyPlanId)
     {
         return await _context.StudyTask
             .Where(task => task.StudyPlanId == studyPlanId)
