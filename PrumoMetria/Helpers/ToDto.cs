@@ -1,4 +1,5 @@
-﻿using PrumoMetria.Dto.Contents;
+﻿using PrumoMetria.Dto;
+using PrumoMetria.Dto.Contents;
 using PrumoMetria.Dto.StudyPlans;
 using PrumoMetria.Dto.Subjects;
 using PrumoMetria.Entities;
@@ -39,6 +40,19 @@ public static class StudyPlanExtensions
             Contents = subject.Contents,
             CreatedAt = subject.CreatedAt,
             Progress = subject.Progress
+        };
+    }
+    
+    public static StudyTaskDTO ToDTOStudyTasks(this StudyTask task)
+    {
+        return new StudyTaskDTO()
+        {
+            Id = task.Id,
+            Title = task.Title,
+            Description = task.Description,
+            DueDate = task.DueDate,
+            IsCompleted = task.IsCompleted,
+            CreatedAt = task.CreatedAt,
         };
     }
 }
