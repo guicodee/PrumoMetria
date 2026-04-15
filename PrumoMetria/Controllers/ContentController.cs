@@ -44,6 +44,7 @@ public class ContentController : BaseController
 
     [HttpPost()]
     public async Task<IActionResult> CreateContent(
+        [FromRoute] Guid studyPlanId,
         [FromRoute] Guid subjectId,
         [FromBody] CreateContentDTO content)
     {
@@ -54,7 +55,7 @@ public class ContentController : BaseController
         if (!result.IsSuccess)
             return StatusCode(result.StatusCode, result.Error);    
         
-        return CreatedAtAction(nameof(GetContentById), new { subjectId, contentId = result.Data!.Id}, result.Data);
+        return CreatedAtAction(nameof(GetContentById), new { studyPlanId, subjectId, contentId = result.Data!.Id}, result.Data);
     }
 
     [HttpPut("{contentId}")]
