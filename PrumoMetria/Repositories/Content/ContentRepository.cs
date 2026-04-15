@@ -39,10 +39,10 @@ public class ContentRepository : IContentRepository
             .FirstOrDefaultAsync(c => c.Id == contentId);
     }
 
-    public async Task<List<Content>> GetContentList(Guid contentId)
+    public async Task<List<Content>> GetContentList(Guid subjectId)
     {
         return await _context.Contents
-            .Where(content => content.Id == contentId)
+            .Where(content => content.SubjectId == subjectId)
             .OrderBy(content => content.CreatedAt)
             .ToListAsync();
     }
